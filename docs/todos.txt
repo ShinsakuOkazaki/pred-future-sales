@@ -1,0 +1,11 @@
+Cleaning exisiting code
+    - Turn existing notebook to python script of modeling
+    - Perform EDA again to understand data and make documentation
+	- Create check list and todos
+	    - What kind of feature can be generated
+	    - What kind of technique can be tried
+    	    - What validation technique can be implemented
+	    - How we can treate missing value	
+	    - What kind of optimization can be selected for the evaluation metric
+        - Create summary docs for research problems
+    - Create csv files for generated feature
