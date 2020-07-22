@@ -1,4 +1,6 @@
 Cleaning exisiting code
+    - Configure gcp instance
+       - Install anaconda
     - Turn existing notebook to python script of modeling
     - Perform EDA again to understand data and make documentation
 	- Create check list and todos
