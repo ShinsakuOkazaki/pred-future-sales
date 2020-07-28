@@ -1,0 +1,25 @@
+Original Feature
+    - sales_train.csv (Daily historical data from January 2013 to October 2015)
+        - data_block_num
+        - shop_id
+	- item_id
+	- item_price
+	- item_count_day
+    - test.csv (forecast the sales for shops and products for November 2015)
+	- ID
+	- shop_id
+	- item_id
+   - Master data
+        - items.csv
+	    - item_id
+    	    - item_category_id
+        - shops.csv
+      	    - shop_name
+	    - shop_id
+        - item_categories.csv
+	    - item_category_name
+	    - item_category_id
+
+Comment
+    -  
+    
