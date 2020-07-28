@@ -1,25 +1,60 @@
 Original Feature
+
+
     - sales_train.csv (Daily historical data from January 2013 to October 2015)
         - data_block_num
         - shop_id
-	- item_id
-	- item_price
-	- item_count_day
-    - test.csv (forecast the sales for shops and products for November 2015)
-	- ID
-	- shop_id
-	- item_id
-   - Master data
-        - items.csv
-	    - item_id
-    	    - item_category_id
-        - shops.csv
-      	    - shop_name
-	    - shop_id
-        - item_categories.csv
-	    - item_category_name
-	    - item_category_id
+			* some shops occur many times and some other shops occur few times
+			* 60 unique shops
+		- item_id
+			* 21807 unique items
+		- item_price 
+			* There can be outlier
+			* -1 could be representation of null
+			* item_price could be set in relatively same item_price
+		- item_count_day
+			* number of products sold at the day
+			* There can be outlier
+			* It could be heavily dependent on item
+			* check if it is returned or not
+
+
+	- test.csv (forecast the sales for shops and products for November 2015)
+		- ID
+			* 214200 unique pair
+		- shop_id
+			* Check if there are some new shops
+			* 42 unique shops
+			* 0 new shops
+		- item_id
+			* Check if there are some new items
+			* 5100 unique items
+			* 363 new items
+   
+	- items.csv
+		- item_id
+		- item_category_id
+			* 22170 unique items
+
+	- shops.csv
+		- shop_name
+			* starts with the city name
+		- shop_id
+			* 60 unique shops
+
+	- item_categories.csv
+		- item_category_name
+			* contains "type" and "subtype"
+		- item_category_id
+			* 84 unique item_categories
 
 Comment
-    -  
-    
+	- Predict number of total sales corresponding to items in each shop soled in Nov 2015
+    - lag feature can be created 
+		- 
+Todos
+	- deal with outlier in item_price and item_count_day
+	- replace negative values in item_price in sales_train with median
+   	- replace -1 in item_price to null or 0 (gradient boosting tree can deal with null value)
+	- generate train data for each month and 
+
