@@ -23,11 +23,9 @@ Original Feature
 		- ID
 			* 214200 unique pair
 		- shop_id
-			* Check if there are some new shops
 			* 42 unique shops
 			* 0 new shops
 		- item_id
-			* Check if there are some new items
 			* 5100 unique items
 			* 363 new items
    
@@ -53,8 +51,18 @@ Comment
     - lag feature can be created 
 		- 
 Todos
-	- deal with outlier in item_price and item_count_day
-	- replace negative values in item_price in sales_train with median
-   	- replace -1 in item_price to null or 0 (gradient boosting tree can deal with null value)
-	- generate train data for each month and 
+	- generate train data for each month
+		- generate day, date, month feature
+		- aggregate item_price and item_cnt_day by item_id, shopi_id, and month
+	- find out validation strategy
+	- search how to deal with outlier rather than removing it
+	
 
+Done
+	- deal with outlier in item_price and item_cnt_day	
+		- use item_price <= 100000
+		- use item_cnt_day <= 1000
+	- replace negative values in item_price in sales_train with median
+		- there is only one -1 in item_price 
+		- simply replacing with median can work
+	- 
