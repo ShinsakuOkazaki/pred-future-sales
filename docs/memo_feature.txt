@@ -51,10 +51,55 @@ Comment
     - lag feature can be created 
 		- 
 Todos
-	- generate train data for each month
-		- generate day, date, month feature
-		- aggregate item_price and item_cnt_day by item_id, shopi_id, and month
+	- create lag features
+		- simple target lag feature
+			- lag of item_cnt_month
+			- lag of item_total_price
+			- 1, 2, 3, 6, 12 months 
+				- (we are taking lag of far past, because the same item and shop does not occur frequently )
+		- Mean encoded features for each month
+		    - Simple mean encoding
+				- Lag feature of average of value for each month (date_block_num)
+					- item_cnt_month
+					- lag: 1 month
+				- Lag feature of average of value for each items in the month (date_block_num * item_id)
+					- item_cnt_month
+					- lag: 1, 2, 3, 6. 12 month
+				- Lag feature of average of value for each shops in the month (date_block_num * shop_id) 
+					- item_cnt_month
+					- lag: 1, 2, 3, 6, 12 month
+				- Lag feature of average of value for each item_categories in the month  (date_block_num * item_category_id)
+					- item_cnt_month
+					- lag: 1, 2, 3, 6, 12 month
+				- Lag feature of average of value for each item type in the month  (date_block_num * type_code)
+					- item_cnt_month
+					- lag: 1 month
+				- Lag feature of average of value for each item subtype in the month  (date_block_num * subtype_code)
+					- item_cnt_month
+					- lag: 1 month
+				- Lag feature of average of value for each city in the month  (date_block_num * city_code)
+					- item_cnt_month
+					- lag: 1 month
+			- Combination mean encoding
+				- Lag feature of average of value for each combination of shop and item_category in the month (date_block_num * shop_id * item_category_id) 
+				    - item_cnt_month
+					- lag: 1 month
+				- Lag feature of average of value for each combination of shop and item type in the month (date_block_num * shop_id * type_code)
+					- item_cnt_month
+					- lag: 1 month 
+				- Lag feature of average of value for each combination of shop and item subtype in the month (date_block_num * shop_id * subtype_code)
+					- item_cnt_month
+					- lag: 1 month 
+				- Lag feature of average of value for each combination of item and  city in the month (date_block_num * item_id * city_code)
+					- item_cnt_month
+					- lag: 1 month 	
+	- create trend feature for price
+	- calculate 'revenue' (item_price * item_cnt_day) on sales_train file 
+	- create feature related to month and use month as key to merge it
 	- find out validation strategy
+	- create scaled dataset additionally
+	- create binning feature
+		- ex) item_total_price: 
 	- search how to deal with outlier rather than removing it
 	
 
@@ -65,4 +110,8 @@ Done
 	- replace negative values in item_price in sales_train with median
 		- there is only one -1 in item_price 
 		- simply replacing with median can work
-	- 
+	- generatetrain data for each month
+		- generate day, date, month feature
+		- aggregate item_price and item_cnt_day by item_id, shopi_id, and month
+	- create training dataset similar to test dataset
+		- create all pair of shops and items occurred in the month
