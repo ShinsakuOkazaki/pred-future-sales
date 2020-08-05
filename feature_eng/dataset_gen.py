@@ -54,7 +54,8 @@ if __name__ == '__main__':
     train_test.astype(dtype={'date_block_num': 'int32', 'shop_id': 'int32', 'item_id': 'int32'})
     train_test.sort_values(cols, inplace=True)
     group = sales_train.groupby(['date_block_num', 'shop_id', 'item_id']).agg({'item_cnt_day': ['sum']})
-    group.columns = ['item_cnt_month'].reset_index(replace=True)
+    group.columns = ['item_cnt_month']
+    group.reset_index(inplace=True)
     train_test = pd.merge(train_test, group, on=cols, how='left')
     train_test['item_cnt_month'] = (train_test['item_cnt_month']
                                     .fillna(0)
@@ -67,7 +68,7 @@ if __name__ == '__main__':
     train_test.drop(['shop_name', 'city', 'item_name', 'item_category_name', 'type', 'subtype'],axis=1, inplace=True)
 
     ################save files###########################
-    sales_train.to_csv(path_or_buf=working_dir + 'data/interim/sales_train.csv', index=False)
-    shops.to_csv(path_or_buf=working_dir + 'data/interim/shops.csv', index=False)
-    item_categories.to_csv(path_or_buf=working_dir + 'data/interim/item_categories.csv', index=False)
-    train_test.to_csv(path_or_buf=working_dir + 'data/interim/train_test.csv', index=False)
+    sales_train.to_csv(path_or_buf=working_dir + '/data/interim/sales_train.csv', index=False)
+    shops.to_csv(path_or_buf=working_dir + '/data/interim/shops.csv', index=False)
+    item_categories.to_csv(path_or_buf=working_dir + '/data/interim/item_categories.csv', index=False)
+    train_test.to_csv(path_or_buf=working_dir + '/data/interim/train_test.csv', index=False)
