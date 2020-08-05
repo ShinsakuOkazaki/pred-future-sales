@@ -68,7 +68,7 @@ if __name__ == '__main__':
     train_test.drop(['shop_name', 'city', 'item_name', 'item_category_name', 'type', 'subtype'],axis=1, inplace=True)
 
     ################save files###########################
-    sales_train.to_csv(path_or_buf=working_dir + 'data/interim/sales_train.csv', index=False)
-    shops.to_csv(path_or_buf=working_dir + 'data/interim/shops.csv', index=False)
-    item_categories.to_csv(path_or_buf=working_dir + 'data/interim/item_categories.csv', index=False)
-    train_test.to_csv(path_or_buf=working_dir + 'data/interim/train_test.csv', index=False)
+    sales_train.to_csv(path_or_buf=working_dir + '/data/interim/sales_train.csv', index=False)
+    shops.to_csv(path_or_buf=working_dir + '/data/interim/shops.csv', index=False)
+    item_categories.to_csv(path_or_buf=working_dir + '/data/interim/item_categories.csv', index=False)
+    train_test.to_csv(path_or_buf=working_dir + '/data/interim/train_test.csv', index=False)
