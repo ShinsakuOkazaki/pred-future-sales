@@ -54,47 +54,52 @@ Todos
 	- create lag features
 		- simple target lag feature
 			- lag of item_cnt_month
-			- lag of item_total_price
 			- 1, 2, 3, 6, 12 months 
 				- (we are taking lag of far past, because the same item and shop does not occur frequently )
 		- Mean encoded features for each month
-		    - Simple mean encoding
+		    - Simple mean encoding for item_cnt_month
 				- Lag feature of average of value for each month (date_block_num)
-					- item_cnt_month
 					- lag: 1 month
 				- Lag feature of average of value for each items in the month (date_block_num * item_id)
-					- item_cnt_month
 					- lag: 1, 2, 3, 6. 12 month
 				- Lag feature of average of value for each shops in the month (date_block_num * shop_id) 
-					- item_cnt_month
 					- lag: 1, 2, 3, 6, 12 month
 				- Lag feature of average of value for each item_categories in the month  (date_block_num * item_category_id)
-					- item_cnt_month
 					- lag: 1, 2, 3, 6, 12 month
 				- Lag feature of average of value for each item type in the month  (date_block_num * type_code)
-					- item_cnt_month
 					- lag: 1 month
 				- Lag feature of average of value for each item subtype in the month  (date_block_num * subtype_code)
-					- item_cnt_month
 					- lag: 1 month
 				- Lag feature of average of value for each city in the month  (date_block_num * city_code)
-					- item_cnt_month
 					- lag: 1 month
-			- Combination mean encoding
+			- Combination mean encoding for item_cnt_month
 				- Lag feature of average of value for each combination of shop and item_category in the month (date_block_num * shop_id * item_category_id) 
-				    - item_cnt_month
 					- lag: 1 month
 				- Lag feature of average of value for each combination of shop and item type in the month (date_block_num * shop_id * type_code)
-					- item_cnt_month
 					- lag: 1 month 
 				- Lag feature of average of value for each combination of shop and item subtype in the month (date_block_num * shop_id * subtype_code)
-					- item_cnt_month
 					- lag: 1 month 
 				- Lag feature of average of value for each combination of item and  city in the month (date_block_num * item_id * city_code)
-					- item_cnt_month
 					- lag: 1 month 	
-	- create trend feature for price
-	- calculate 'revenue' (item_price * item_cnt_day) on sales_train file 
+	- create trend feature for item price
+		- item_price_total_avg: calculate item price average on overall train data
+		- item_price_month_avg: calculate item price average for each month
+		- item_price_month_avg_lag_i: generate lag feature of item_price_month_avg
+			- lag: [1, 2, 3, 4, 5, 6]
+		- delta_item_price_lag_i :calculate 
+			- (item_month_avg_lag  - item_price_total_avg) / item_price_total_avg
+		- select delta_item_price_lag_i which is not 0 and whose i is smallest for each row.
+	- create trend feature for shop revenue
+		- calculate 'revenue' (item_price * item_cnt_day) on sales_train file 
+		- shop_month_revenue: calculate monthly revenue for each shop in the month
+		- shop_avg_revenue: calculate average of monthly revenue
+		- delta_shop_revenue: calculate
+			- (shop_month_revenue - shop_avg_revenue) / shop_avg_revenue
+		- delta_shop_renenue_lag
+			- lag: 1
+
+
+	
 	- create feature related to month and use month as key to merge it
 	- find out validation strategy
 	- create scaled dataset additionally
