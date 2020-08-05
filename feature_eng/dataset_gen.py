@@ -54,7 +54,8 @@ if __name__ == '__main__':
     train_test.astype(dtype={'date_block_num': 'int32', 'shop_id': 'int32', 'item_id': 'int32'})
     train_test.sort_values(cols, inplace=True)
     group = sales_train.groupby(['date_block_num', 'shop_id', 'item_id']).agg({'item_cnt_day': ['sum']})
-    group.columns = ['item_cnt_month'].reset_index(replace=True)
+    group.columns = ['item_cnt_month']
+    group.reset_index(inplace=True)
     train_test = pd.merge(train_test, group, on=cols, how='left')
     train_test['item_cnt_month'] = (train_test['item_cnt_month']
                                     .fillna(0)
