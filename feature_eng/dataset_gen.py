@@ -61,7 +61,8 @@ if __name__ == '__main__':
                                     .fillna(0)
                                     .clip(0,20) # NB clip target here
                                     .astype(np.float64))
-
+    train_test = pd.concat([train_test, test], ignore_index=True, sort=False, keys=cols)
+    train_test.fillna(0,inplace=True)
     train_test = pd.merge(train_test, shops, on=['shop_id'], how='left')
     train_test = pd.merge(train_test, items, on=['item_id'], how='left')
     train_test = pd.merge(train_test, item_categories, on=['item_category_id'], how='left')
@@ -71,4 +72,4 @@ if __name__ == '__main__':
     sales_train.to_csv(path_or_buf=working_dir + '/data/interim/sales_train.csv', index=False)
     shops.to_csv(path_or_buf=working_dir + '/data/interim/shops.csv', index=False)
     item_categories.to_csv(path_or_buf=working_dir + '/data/interim/item_categories.csv', index=False)
-    train_test.to_csv(path_or_buf=working_dir + '/data/interim/train_test.csv', index=False)
+    train_test.to_pickle(path=working_dir + '/data/interim/train_test_data.pkl')
