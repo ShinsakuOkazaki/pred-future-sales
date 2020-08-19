@@ -51,6 +51,28 @@ Comment
     - lag feature can be created 
 		- 
 Todos
+	- create month number
+	- create 
+	- create feature related to month and use month as key to merge it
+	- find out validation strategy
+	- create scaled dataset additionally
+	- create binning feature
+		- ex) item_total_price: 
+	- search how to deal with outlier rather than removing it
+	
+
+Done
+	- deal with outlier in item_price and item_cnt_day	
+		- use item_price <= 100000
+		- use item_cnt_day <= 1000
+	- replace negative values in item_price in sales_train with median
+		- there is only one -1 in item_price 
+		- simply replacing with median can work
+	- generatetrain data for each month
+		- generate day, date, month feature
+		- aggregate item_price and item_cnt_day by item_id, shopi_id, and month
+	- create training dataset similar to test dataset
+		- create all pair of shops and items occurred in the month
 	- create lag features
 		- simple target lag feature
 			- lag of item_cnt_month
@@ -96,27 +118,4 @@ Todos
 		- delta_shop_revenue: calculate
 			- (shop_month_revenue - shop_avg_revenue) / shop_avg_revenue
 		- delta_shop_renenue_lag
-			- lag: 1
-
-
-	
-	- create feature related to month and use month as key to merge it
-	- find out validation strategy
-	- create scaled dataset additionally
-	- create binning feature
-		- ex) item_total_price: 
-	- search how to deal with outlier rather than removing it
-	
-
-Done
-	- deal with outlier in item_price and item_cnt_day	
-		- use item_price <= 100000
-		- use item_cnt_day <= 1000
-	- replace negative values in item_price in sales_train with median
-		- there is only one -1 in item_price 
-		- simply replacing with median can work
-	- generatetrain data for each month
-		- generate day, date, month feature
-		- aggregate item_price and item_cnt_day by item_id, shopi_id, and month
-	- create training dataset similar to test dataset
-		- create all pair of shops and items occurred in the month
+			- lag: 1	
