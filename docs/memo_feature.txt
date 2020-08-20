@@ -51,10 +51,10 @@ Comment
     - lag feature can be created 
 		- 
 Todos
-	- create month number
-	- create 
-	- create feature related to month and use month as key to merge it
+	- train with validation data and predict test
 	- find out validation strategy
+		1. simple hold-out based on time series
+		2. hold-out based on one year seasonality
 	- create scaled dataset additionally
 	- create binning feature
 		- ex) item_total_price: 
@@ -119,3 +119,5 @@ Done
 			- (shop_month_revenue - shop_avg_revenue) / shop_avg_revenue
 		- delta_shop_renenue_lag
 			- lag: 1	
+
+	- create month number
