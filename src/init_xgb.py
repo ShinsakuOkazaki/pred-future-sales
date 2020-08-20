@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import gc
 import xgboost as xgb
+from sklearn.metrics import mean_squared_error
 working_dir = '~/Project/pred-future-sales'
 
 params = {
@@ -21,7 +22,7 @@ num_round = 50
 
 if __name__ == '__main__':
     train_test = pd.read_pickle(working_dir + '/data/interim/train_test.pkl')
-
+    test = pd.read_csv(working_dir + '/data/raw/test.csv')
     x_train = train_test[train_test.date_block_num < 33].drop(['item_cnt_month'], axis=1)
     y_train = train_test[train_test.date_block_num < 33]['item_cnt_month']
     x_valid = train_test[train_test.date_block_num == 33].drop(['item_cnt_month'], axis=1)
@@ -38,6 +39,18 @@ if __name__ == '__main__':
 
     watchlist = [(dtrain, 'train', (dvalid, 'eval'))]
     model = xgb.train(params, dtrain, num_round, evals=watchlist, early_stopping_rounds=50)
-    
+    va_pred = model.predict(dvalid)
+    score = mean_squared_error(y_valid, va_pred)
+    print('rsme: {}'.format(score))
+
+    pred = model.predict(dtest)
+
+    submission = pd.DataFrame({
+        'ID' : test.index, 
+        'item_cnt_month': pred
+        })
+
+    submission.to_csv(working_dir + '/submission/init_xgb_submission.csv', index=False)
+
 
 
