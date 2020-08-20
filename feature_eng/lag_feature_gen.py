@@ -33,7 +33,7 @@ def select_trend(row):
 
 if __name__ == '__main__':
     sales_train = pd.read_csv(working_dir + '/data/interim/sales_train.csv')
-    train_test = pd.read_pckle(working_dir + '/data/interim/train_test.pkl')
+    train_test = pd.read_pickle(working_dir + '/data/interim/train_test.pkl')
 
 
     # create item_cnt_month_lag_i (i = 1, 2, 3, 6, 12)

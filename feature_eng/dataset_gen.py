@@ -72,4 +72,4 @@ if __name__ == '__main__':
     sales_train.to_csv(path_or_buf=working_dir + '/data/interim/sales_train.csv', index=False)
     shops.to_csv(path_or_buf=working_dir + '/data/interim/shops.csv', index=False)
     item_categories.to_csv(path_or_buf=working_dir + '/data/interim/item_categories.csv', index=False)
-    train_test.to_pickle(path=working_dir + '/data/interim/train_test_data.pkl')
+    train_test.to_pickle(path=working_dir + '/data/interim/train_test.pkl')
