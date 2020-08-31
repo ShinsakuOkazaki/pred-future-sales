@@ -15,3 +15,4 @@ umap-learn == 0.3.9
 notebook
 matplotlib
 seaborn
+joblib
