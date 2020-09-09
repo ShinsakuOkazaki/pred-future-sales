@@ -10,11 +10,11 @@ class Util:
 
     @classmethod
     def dump(cls, value, path):
-        os.makedirs(os.path.dirname(path, exist_ok=True))        
+        os.makedirs(os.path.dirname(path), exist_ok=True)        
         joblib.dump(value, path, compress=True)
     @classmethod
     def load(cls, path):
-        return joblin.load(path)
+        return joblib.load(path)
 
 
 class Logger:
@@ -42,7 +42,7 @@ class Logger:
     def result_ltsv(self, dic):
         self.result(self.to_ltsv(dic))
 
-    def resut_scores(self, run_name, scores):
+    def result_scores(self, run_name, scores):
        dic = dict() 
        dic['name'] = run_name
        dic['score'] = np.mean(scores)
@@ -50,7 +50,7 @@ class Logger:
            dic[f'score{i}'] = score
        self.result(self.to_ltsv(dic))
 
-    def now_strin(self):
+    def now_string(self):
         return str(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
 
     def to_ltsv(self, dic):
@@ -60,11 +60,15 @@ class Logger:
 class Submission:
 
     @classmethod
-    def create_submission(cls, run_name):
+    def create_submission(cls, run_name, i_fold=None):
         submission = pd.read_csv('../data/raw/sample_submission.csv')
-        pred = Util.load(f'../models/pred/{run_name}-test.pkl')
-        for i in range(pred.shape[1]):
-            submission[f'Class_{i + 1}'] = pred[:, i]
-        submission.to_csv(f'../submission/{run_name}.csv', index=False)
+        if i_fold:
+            run_fold_name = f'{run_name}-{i_fold}'
+        else:
+            run_fold_name = f'{run_name}-test'
+       
+        pred = Util.load(f'../models/pred/{run_fold_name}.pkl')
+        submission['item_cnt_month'] = pred
+        submission.to_csv(f'../submission/{run_fold_name}.csv', index=False)
 
     

@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from abs import ABCMeta, abstractmethod
+from abc import ABCMeta, abstractmethod
 from typing import Optional
 
 class Model(metaclass=ABCMeta):
@@ -44,6 +44,6 @@ class Model(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def loadd_model(self) -> None:
+    def load_model(self) -> None:
         """load model"""
         pass
