@@ -1,3 +1,5 @@
 data
 .pynb_checkpoints
 venv
+model
+pred
