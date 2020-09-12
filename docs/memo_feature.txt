@@ -51,6 +51,8 @@ Comment
     - lag feature can be created 
 		- 
 Todos
+	- create function to get index for validation 
+		- we are separating data based on date_block_num, but to make the system flexible we need to get index for the data_block_num used for validation
 	- find out validation strategy
 			1. simple hold-out based on time series
 				- tr: 12-32, va: 33, te: 34
