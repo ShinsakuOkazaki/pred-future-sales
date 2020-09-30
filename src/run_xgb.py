@@ -65,8 +65,8 @@ if __name__ == '__main__':
     test_path = '/interim/test.pkl'
 
     
-    # runner.run_train_cv()
-    # runner.run_predict_cv()
+    runner.run_train_cv()
+    runner.run_predict_cv()
     Submission.create_submission('xgb1', 0)
     Submission.create_submission('xgb1', 1)
     Submission.create_submission('xgb1', 2)
