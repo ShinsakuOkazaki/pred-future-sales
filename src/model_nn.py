@@ -96,5 +96,12 @@ class ModelNN(Model):
         y_pred = self.model.predict(te_x)
         return y_pred
 
+    def save_model(self):
+        model_path = os.path.join('../models/model', f'{self.run_fold_name}.model') 
+        os.makedirs(os.path.dirname(model_path), exist_ok=True)
+        Util.dump(self.model, model_path)
             
 
+    def load_model(self):
+        model_path = os.path.join('../models/model', f'{self.run_fold_name}.model')
+        self.model = Util.load(model_path)
