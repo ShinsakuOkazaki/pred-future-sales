@@ -15,6 +15,7 @@ class Model(metaclass=ABCMeta):
         self.run_fold_name = run_fold_name
         self.params = params
         self.model = None
+        self.scaler = None
     
     @abstractmethod
     def train(self, tr_x: pd.DataFrame, tr_y: pd.Series, 
