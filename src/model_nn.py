@@ -2,15 +2,14 @@ import os
 
 import numpy as np
 import pandas as pd
-import tensorflow as tf
-from tf.keras.callbacks import EarlyStopping
-from tf.keras.layers.advanced_activations import PReLU, ReLu
-from tf.keras.layers.core import Activation, Dense, Dropout
-from tf.keras.layers.normalization import BatchNormalization
-from tf.keras.models import Sequential, load_model
-from tf.keras.utils import np_utils
-from tf.keras.optimizer import SGD, Adam
 
+from tensorflow.keras.callbacks import EarlyStopping
+from tensorflow.python.keras.layers.advanced_activations import PReLU, ReLU
+from tensorflow.keras.layers import Activation, Dense, Dropout
+from tensorflow.keras.layers import BatchNormalization
+from tensorflow.keras.models import Sequential, load_model
+from tensorflow.keras.optimizers import SGD, Adam
+from tensorflow.keras.models import load_model
 from sklearn.preprocessing import StandardScaler
 
 from model import Model
@@ -27,11 +26,11 @@ class ModelNN(Model):
         tr_x = self.scaler.transform(tr_x)
         
         if validation:
-            va_x = scaler.transform(va_x)
+            va_x = self.scaler.transform(va_x)
         
         input_dropout = self.params['input_dropout'] # float: ration of unit droped out in input layer
         hidden_layers = self.params['hidden_layers'] # int: number of hidden layer
-        hidden_units = self.params['units'] # int: number of units for each hidden layer
+        hidden_units = self.params['hidden_units'] # int: number of units for each hidden layer
         hidden_activation = self.params['hidden_activation'] # str(prelu, relu) : activation function of hidden layer
         hidden_dropout = self.params['hidden_dropout'] # int: number of units droped out in each hidden layer
         batch_norm = self.params['batch_norm'] # str (before_act): whether perfom BatchNormalization before activation
@@ -51,9 +50,9 @@ class ModelNN(Model):
                 self.model.add(BatchNormalization())
             
             if hidden_activation == 'prelu':
-                self.model.add(PReLU)
-            elif hidden_activation == 'reru':
-                self.model.add(ReLu)
+                self.model.add(PReLU())
+            elif hidden_activation == 'relu':
+                self.model.add(ReLU())
             else:
                 raise NotImplementedError
 
@@ -97,11 +96,10 @@ class ModelNN(Model):
         return y_pred
 
     def save_model(self):
-        model_path = os.path.join('../models/model', f'{self.run_fold_name}.model') 
+        model_path = os.path.join('../models/model', f'{self.run_fold_name}.h5') 
         os.makedirs(os.path.dirname(model_path), exist_ok=True)
-        Util.dump(self.model, model_path)
-            
+        self.model.save(model_path) 
 
     def load_model(self):
-        model_path = os.path.join('../models/model', f'{self.run_fold_name}.model')
-        self.model = Util.load(model_path)
+        model_path = os.path.join('../models/model', f'{self.run_fold_name}.h5')
+        self.model = load_model(model_path)
