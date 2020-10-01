@@ -11,7 +11,6 @@ from tf.keras.models import Sequential, load_model
 from tf.keras.utils import np_utils
 from tf.keras.optimizer import SGD, Adam
 
-from sklearn.preprocessing import StandardScaler
 
 from model import Model
 from util import Util
@@ -22,9 +21,6 @@ class ModelNN(Model):
         validation = va_x is not None
         
         # Standardize
-        self.scaler = StandardScaler()
-        self.scaler.fit(tr_x)
-        tr_x = self.scaler.transform(tr_x)
         
         if validation:
             va_x = scaler.transform(va_x)
@@ -42,6 +38,7 @@ class ModelNN(Model):
         self.model = Sequential()
 
         # Input Layer
+        self.model.add(BatchNormalization())
         self.model.add(Dropout(input_dropout, input_shape=(tr_x.shape[1], )))
         
         # Hidden Layers
