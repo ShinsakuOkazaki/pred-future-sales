@@ -51,8 +51,21 @@ Comment
     - lag feature can be created 
 		- 
 Todos
-	- create function to get index for validation 
-		- we are separating data based on date_block_num, but to make the system flexible we need to get index for the data_block_num used for validation
+	- write best process for validation traning and prediction. 
+		- for neural network we need scaler used in training to be saved for prediction.
+		- but scaler is not savable with builtin model_save method.
+		
+	
+Done
+  - write scalable code for change of validation strategy
+	- train with validation data and predict test
+	- create scaled dataset additionally
+	- create binning feature
+		- ex) item_total_price: 
+	- search how to deal with outlier rather than removing it
+	
+  - create function to get index for validation 
+			- we are separating data based on date_block_num, but to make the system flexible we need to get index for the data_block_num used for validation
 	- find out validation strategy
 			1. simple hold-out based on time series
 				- tr: 12-32, va: 33, te: 34
@@ -62,15 +75,6 @@ Todos
 				- tr: [12-15, 12-18, 12-21, 12-24, 12-27, 12-30, 12-32]
 				, va: [16, 19, 22, 25, 28, 31, 33]
 				, te: [34]
-	- write scalable code for change of validation strategy
-	- train with validation data and predict test
-	- create scaled dataset additionally
-	- create binning feature
-		- ex) item_total_price: 
-	- search how to deal with outlier rather than removing it
-	
-
-Done
 	- deal with outlier in item_price and item_cnt_day	
 		- use item_price <= 100000
 		- use item_cnt_day <= 1000

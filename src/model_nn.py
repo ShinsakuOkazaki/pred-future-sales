@@ -10,7 +10,6 @@ from tensorflow.keras.layers import BatchNormalization
 from tensorflow.keras.models import Sequential, load_model
 from tensorflow.keras.optimizers import SGD, Adam
 from tensorflow.keras.models import load_model
-from sklearn.preprocessing import StandardScaler
 
 from model import Model
 from util import Util
@@ -21,9 +20,6 @@ class ModelNN(Model):
         validation = va_x is not None
         
         # Standardize
-        self.scaler = StandardScaler()
-        self.scaler.fit(tr_x)
-        tr_x = self.scaler.transform(tr_x)
         
         if validation:
             va_x = self.scaler.transform(va_x)
@@ -41,6 +37,7 @@ class ModelNN(Model):
         self.model = Sequential()
 
         # Input Layer
+        self.model.add(BatchNormalization())
         self.model.add(Dropout(input_dropout, input_shape=(tr_x.shape[1], )))
         
         # Hidden Layers
@@ -91,7 +88,6 @@ class ModelNN(Model):
         
     def predict(self, te_x):
 
-        te_x = self.scaler.transform(te_x)
         y_pred = self.model.predict(te_x)
         return y_pred
 
