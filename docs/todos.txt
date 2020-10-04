@@ -1,6 +1,5 @@
 Todos
     - set base parameter for xbgboost
-    - 
     - do feature selection 
         1. Permutation importance
     - If feature selection has huge impact on its performance, do more selection method
