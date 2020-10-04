@@ -65,19 +65,9 @@ if __name__ == '__main__':
     test_path = '/interim/test.pkl'
 
     
-    runner.run_train_cv()
-    runner.run_predict_cv()
-    Submission.create_submission('xgb1', 0)
-    Submission.create_submission('xgb1', 1)
-    Submission.create_submission('xgb1', 2)
-    Submission.create_submission('xgb1', 3)
-    Submission.create_submission('xgb1', 4)
-    Submission.create_submission('xgb1', 5)
-    Submission.create_submission('xgb1', 6)
-
-    # runner = Runner('xgb1-train-all', ModelXGB, features, params_xgb, train_path, test_path)
-    # runner.run_train_all()
-    # runner.run_predict_all()
-    # Submission.create_submission('xgb1-train-all')
+    runner = Runner('xgb2-train-all', ModelXGB, features, params_xgb, train_path, test_path)
+    runner.run_train_all()
+    runner.run_predict_all()
+    Submission.create_submission('xgb2-train-all')
 
     

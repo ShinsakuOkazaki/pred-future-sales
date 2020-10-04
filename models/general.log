@@ -301,3 +301,7 @@
 [2020-10-01 22:32:15]
 [2020-10-01 22:32:15]
 [2020-10-01 22:32:20]
+[2020-10-04 07:56:32] - xgb2-train-all - start training all
+[2020-10-04 09:31:19] - xgb2-train-all - end training all
+[2020-10-04 09:31:19] - xgb2-train-all - start prediction all
+[2020-10-04 09:31:22] - xgb2-train-all - end prediction all
