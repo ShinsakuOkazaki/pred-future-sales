@@ -34,7 +34,7 @@ class Logger:
             self.result_logger.setLevel(logging.INFO)
 
     def info(self, message):
-        self.general_logger.info('[{}]'.format(self.now_string(), message))
+        self.general_logger.info('[{}] - {}'.format(self.now_string(), message))
 
     def result(self, message):
         self.result_logger.info(message)

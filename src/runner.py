@@ -62,16 +62,16 @@ class Runner:
         """train and evaluate with cross-validation
         train and evaluate with each fold and save the model 
         """
-        logger.info(f'{self.run_name} - start traing cv')
+        logger.info('{} - start traing cv'.format(self.run_name))
 
         scores = []
         preds = []
         va_idxes = []
         for i_fold in range(self.n_fold):
             # train model
-            logger.info(f'{self.run_name} fold {i_fold} - start training')
+            logger.info('{} fold {} - start training'.format(self.run_name, i_fold))
             model, va_idx, pred_va, score = self.train_fold(i_fold)
-            logger.info(f'{self.run_name} fold {i_fold} - end training - score {score}')
+            logger.info('{} fold {} - end training - score {}'.format(self.run_name, i_fold, score))
 
             # save model
             model.save_model()
@@ -86,11 +86,24 @@ class Runner:
         preds = np.concatenate(preds, axis=0)
         preds = preds[order]
 
-        logger.info(f'{self.run_name} - end training cv - score {np.mean(scores)}')
+        logger.info('{} - end training cv - score {}'.format(self.run_name, np.mean(scores)))
         Util.dump(preds, f'../models/pred/{self.run_name}-train.pkl')
 
         logger.result_scores(self.run_name, scores)
 
+    def run_train_cv_each(self, i_fold: Union[int, str]) -> None:
+
+        logger.info(f'{self.run_name} - start traing cv')
+        # train model
+        logger.info(f'{self.run_name} fold {i_fold} - start training')
+        model, va_idx, pred_va, score = self.train_fold(i_fold)
+        logger.info(f'{self.run_name} fold {i_fold} - end training - score {score}')
+        # save model
+        model.save_model()
+        
+        Util.dump(pred_va, f'../models/pred/{self.run_name}-train.pkl')
+
+        logger.result_scores(self.run_name, score)
 
     def run_train_all(self) -> None:
         """train with all data and save the model

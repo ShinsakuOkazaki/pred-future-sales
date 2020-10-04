@@ -17,12 +17,12 @@ if __name__ == '__main__':
         'min_child_weight': 1, 
         'max_depth': 5, 
         'subsample': 0.8,
-        'early_stopping_rounds': None,
+        'early_stopping_rounds': 50,
         'colsample_bytree': 0.8, 
         'random_state': 71, 
         }
 
-    params_xgb['num_round'] = 50
+    params_xgb['num_round'] = 1000
 
 
     features = ['date_block_num', 
