@@ -1,6 +1,6 @@
 kaggle
 cython
-numpy == 1.16.2
+numpy == 1.22.0
 scipy == 1.2.1
 pandas == 0.24.2
 scikit-learn == 0.21.2
